@@ -1,21 +1,48 @@
-.right-box-container {
-  width: 100%;
-  background: lightgray;
-  .right-box-item {
-    height: 222px;
-    border-style: solid;
-    border-color: black;
-    border-width: 1px;
-  }
-  .right-box-title {
-    text-align: center;
-    font-weight: bolder;
-  }
+.toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
 }
+
+.toolbar img {
+    margin: 0 16px;
+}
+
+.toolbar #twitter-logo {
+    height: 40px;
+    margin: 0 16px;
+}
+
+.toolbar #twitter-logo:hover {
+    opacity: 0.8;
+}
+
+.right-box-container {
+    width: 100%;
+    background: lightgray;
+    .right-box-item {
+        height: 222px;
+        border-style: solid;
+        border-color: black;
+        border-width: 1px;
+    }
+    .right-box-title {
+        text-align: center;
+        font-weight: bolder;
+    }
+}
+
 .dot {
     height: 10px;
     width: 10px;
     background-color: red;
     border-radius: 50%;
     display: inline-block;
-  }
+}
