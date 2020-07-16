@@ -12,4 +12,8 @@ export class AppComponent {
   checkType(type: any): any{
     this.typeTitle = type;
   }
+
+  uploadFile(file) {
+    console.log(file);
+  }
 }
