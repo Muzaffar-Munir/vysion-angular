@@ -14,9 +14,12 @@
 <div fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="40px" style="padding: 55px;">
     <div fxFlex="25%">
         <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="40px">
-            <div fxFlex="100%" class="right-box-container">
+            <div fxFlex="100%" class="right-box-container" (click)="checkType('Hear IT')">
                 <div class="right-box-item">
                     <p class="right-box-title">Hear IT</p>
+                    <div style="margin-top: 20px;margin-left: 30px;">
+                        comes list
+                    </div>
                     <div style="margin-top: 150px; margin-left: 30px;">
                         <span class="dot"></span>
                         <span style="display: inline-block;margin-left: 10px;">Record New Sound</span>
@@ -24,7 +27,7 @@
                 </div>
             </div>
             <div fxFlex="100%" class="right-box-container">
-                <div class="right-box-item">
+                <div class="right-box-item" (click)="checkType('SEE IT')">
                     <p class="right-box-title">SEE IT</p>
                     <div style="margin-top: 150px; margin-left: 30px;">
                         <span class="dot"></span>
@@ -34,15 +37,15 @@
             </div>
             <div fxFlex="100%" class="right-box-container">
                 <div class="right-box-item">
-                    <p class="right-box-title">BECOME IT</p>
+                    <p class="right-box-title">Touch IT</p>
                 </div>
             </div>
         </div>
     </div>
     <div fxFlex="50%">
-        <div fxFlex="100%" class="right-box-container">
-            <div class="right-box-item">
-                <p class="right-box-title">SEE IT</p>
+        <div fxFlex="100%" class="center-box-container">
+            <div class="center-box-item">
+                <p class="center-box-title">{{typeTitle}}</p>
                 <div style="margin-top: 150px; margin-left: 30px;">
                     <span class="dot"></span>
                     <span style="display: inline-block;margin-left: 10px;">Record New Sound</span>
