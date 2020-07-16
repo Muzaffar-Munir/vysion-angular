@@ -14,7 +14,7 @@
 <div fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="40px" style="padding: 55px;">
     <div fxFlex="25%">
         <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="40px">
-            <div fxFlex="100%" class="right-box-container" (click)="checkType('Hear IT')">
+            <div fxFlex="100%" class="right-box-container" (click)="checkType('Hear IT')" [ngClass]="{'active':typeTitle=='Hear IT'}">
                 <div class="right-box-item">
                     <p class="right-box-title">Hear IT</p>
                     <div style="margin-top: 20px;margin-left: 30px;">
@@ -26,7 +26,7 @@
                     </div>
                 </div>
             </div>
-            <div fxFlex="100%" class="right-box-container">
+            <div fxFlex="100%" class="right-box-container" [ngClass]="{'active':typeTitle=='SEE IT'}">
                 <div class="right-box-item" (click)="checkType('SEE IT')">
                     <p class="right-box-title">SEE IT</p>
                     <div style="margin-top: 150px; margin-left: 30px;">
@@ -44,7 +44,7 @@
     </div>
     <div fxFlex="50%">
         <div fxFlex="100%" class="center-box-container">
-            <div class="center-box-item">
+            <div class="center-box-item active">
                 <p class="center-box-title">{{typeTitle}}</p>
                 <div style="margin-top: 150px; margin-left: 30px;">
                     <span class="dot"></span>

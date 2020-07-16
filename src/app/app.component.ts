@@ -9,6 +9,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 export class AppComponent {
   typeTitle = 'SEE IT';
   title = 'Vysion';
+  active = 'active';
   checkType(type: any): any{
     this.typeTitle = type;
   }
