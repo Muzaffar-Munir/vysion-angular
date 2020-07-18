@@ -14,7 +14,7 @@
 <div fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="40px" style="padding: 55px;">
     <div fxFlex="25%">
         <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="40px">
-            <div fxFlex="100%" class="right-box-container">
+            <div fxFlex="100%" class="right-box-container" (click)="checkType('Hear IT')">
                 <div class="right-box-item">
                     <p class="right-box-title">Hear IT</p>
                     <div style="margin-top: 150px; margin-left: 30px;">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-            <div fxFlex="100%" class="right-box-container">
+            <div fxFlex="100%" class="right-box-container" (click)="checkType('SEE IT')">
                 <div class="right-box-item">
                     <p class="right-box-title">SEE IT</p>
                     <div style="margin-top: 150px; margin-left: 30px;">
@@ -42,9 +42,9 @@
     <div fxFlex="50%">
         <div fxFlex="100%" class="right-box-container">
             <div class="right-box-item">
-                <p class="right-box-title">SEE IT</p>
+                <p class="right-box-title">{{typeTitle}}</p>
                 <div style="margin-top: 120px; margin-left: 30px; text-align: center;">
-                    <input hidden type="file" #uploader (change)="uploadFile($event)" />
+                    <input hidden type="file" ([ngModel])="image" #uploader (change)="uploadFile($event)" />
                     <button type="button" mat-raised-button (click)="uploader.click()">
                         <mat-icon class="mat-18">add_circle</mat-icon>
                     </button>
@@ -83,7 +83,9 @@
 </div>
 
 
-
+<ng-container *ngIf="imageObject && imageObject.length">
+    <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
+</ng-container>
 
 
 <!-- <router-outlet></router-outlet> -->
