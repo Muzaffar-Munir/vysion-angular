@@ -44,7 +44,8 @@ export class AppComponent {
     console.log(this.headerInput);
     // Show preview
     const mimeType = this.headerInput.type;
-    if (mimeType.match(/image\/*/) == null) {
+ 
+    if (mimeType.match(/image\/*/) == null && mimeType.match(/video\/*/) == null && mimeType.match(/audio\/*/) == null) {
       return;
     }
     console.log('here');
