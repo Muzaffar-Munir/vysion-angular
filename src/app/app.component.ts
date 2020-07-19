@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class AppComponent {
   imageObject: Array<object> = [] as any;
+  audios: Array<object> = [] as any;
   image: any;
   typeTitle = 'SEE IT';
   title = 'Vysion';
@@ -15,12 +17,15 @@ export class AppComponent {
   headerInput = null as File;
   previewHeader = null as any;
 
+
+  constructor(private sanitizer: DomSanitizer) {
+
+  }
   checkType(type: any): any {
     this.typeTitle = type;
   }
 
   uploadFile(event: any): any {
-    console.log(event);
     if (event.target.value) {
       const objVideo = {
         // video: event.target.value,
@@ -40,13 +45,18 @@ export class AppComponent {
     }
   }
   previewImage(fileInput: any): void {
+    console.log(fileInput)
     this.headerInput = fileInput.target.files[0] as File;
     console.log(this.headerInput);
     // Show preview
     const mimeType = this.headerInput.type;
- 
-    if (mimeType.match(/image\/*/) == null && mimeType.match(/video\/*/) == null && mimeType.match(/audio\/*/) == null) {
+    if (!this.headerInput) {
       return;
+    }
+    if (this.typeTitle === 'SEE IT' && mimeType.match(/image\/*/) == null && mimeType.match(/video\/*/) == null) {
+        return;
+    } else if (this.typeTitle === 'Hear IT' && mimeType.match(/audio\/*/) == null) {
+           return;
     }
     console.log('here');
     const reader = new FileReader();
@@ -72,12 +82,12 @@ export class AppComponent {
       if (mimeType.match(/audio\/*/) != null) {
         console.log('in objAudio');
         const objAudio = {
-          audio: this.previewHeader,
-          thumbImage: this.previewHeader,
+          audio: this.sanitizer.bypassSecurityTrustUrl(this.previewHeader),
+          name: this.headerInput?.name
         };
-        this.imageObject.push(objAudio);
+        this.audios.push(objAudio);
       }
-      console.log(this.imageObject);
+      console.log(this.audios);
     };
   }
 }
