@@ -69,6 +69,14 @@ export class AppComponent {
         };
         this.imageObject.push(objVideo);
       }
+      if (mimeType.match(/audio\/*/) != null) {
+        console.log('in objAudio');
+        const objAudio = {
+          audio: this.previewHeader,
+          thumbImage: this.previewHeader,
+        };
+        this.imageObject.push(objAudio);
+      }
       console.log(this.imageObject);
     };
   }
