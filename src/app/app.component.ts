@@ -8,10 +8,14 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class AppComponent {
   imageObject: Array<object> = [] as any;
+  image: any;
   typeTitle = 'SEE IT';
   title = 'Vysion';
   active = 'active';
-  checkType(type: any): any{
+  headerInput = null as File;
+  previewHeader = null as any;
+
+  checkType(type: any): any {
     this.typeTitle = type;
   }
 
@@ -34,5 +38,37 @@ export class AppComponent {
       reader.readAsDataURL(event.target.value);
       console.log(reader.readAsDataURL(event.target.value));
     }
+  }
+  previewImage(fileInput: any): void {
+    this.headerInput = fileInput.target.files[0] as File;
+    console.log(this.headerInput);
+    // Show preview
+    const mimeType = this.headerInput.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+    console.log('here');
+    const reader = new FileReader();
+    reader.readAsDataURL(this.headerInput);
+    reader.onload = (_event) => {
+      this.previewHeader = reader.result;
+      this.image = this.previewHeader;
+      if (mimeType.match(/image\/*/) != null) {
+        console.log('in image');
+        const objImage = {
+          image: this.previewHeader,
+          thumbImage: this.previewHeader,
+        };
+        this.imageObject.push(objImage);
+      }
+      if (mimeType.match(/video\/*/) != null) {
+        console.log('in videos');
+        const objVideo = {
+          video: this.previewHeader
+        };
+        this.imageObject.push(objVideo);
+      }
+      console.log(this.imageObject);
+    };
   }
 }
