@@ -8,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-  imageObject: Array<object> = [] as any;
+  imageObject = [] as any[];
   audios: Array<object> = [] as any;
   image: any;
   typeTitle = 'SEE IT';
@@ -16,6 +16,7 @@ export class AppComponent {
   active = 'active';
   headerInput = null as File;
   previewHeader = null as any;
+  srcData = null;
 
 
   constructor(private sanitizer: DomSanitizer) {
@@ -69,13 +70,17 @@ export class AppComponent {
         const objImage = {
           image: this.previewHeader,
           thumbImage: this.previewHeader,
+          type: 'image',
+          src: this.previewHeader
         };
         this.imageObject.push(objImage);
       }
       if (mimeType.match(/video\/*/) != null) {
         console.log('in videos');
         const objVideo = {
-          video: this.previewHeader
+          video: this.previewHeader,
+          type: 'video',
+          src: this.previewHeader
         };
         this.imageObject.push(objVideo);
       }
@@ -87,7 +92,14 @@ export class AppComponent {
         };
         this.audios.push(objAudio);
       }
-      console.log(this.audios);
+      if (this.imageObject.length === 1 && this.imageObject[0]){
+        this.srcData = this.imageObject[0];
+      }
+      console.log(this.imageObject);
     };
+  }
+  imageClick(index): any {
+    this.srcData =  this.imageObject[index];
+    console.log(this.srcData);
   }
 }

@@ -12,6 +12,11 @@
     margin-bottom: 20px;
 }
 
+.custom-image-main,
+.youtube-icon {
+    cursor: pointer !important;
+}
+
 .active {
     background-color: #f3c0a1;
 }
@@ -33,7 +38,7 @@
     width: 100%;
     background: lightgray;
     .center-box-item {
-        height: 488px;
+        height: 570px;
         border-style: solid;
         border-color: black;
         border-width: 1px;
