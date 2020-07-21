@@ -92,11 +92,14 @@ export class AppComponent {
         };
         this.audios.push(objAudio);
       }
+      if (this.imageObject.length === 1 && this.imageObject[0]){
+        this.srcData = this.imageObject[0];
+      }
       console.log(this.imageObject);
     };
   }
-  imageClick(index) {
+  imageClick(index): any {
     this.srcData =  this.imageObject[index];
-    console.log(this.srcData)
+    console.log(this.srcData);
   }
 }
