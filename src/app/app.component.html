@@ -56,10 +56,10 @@
         <div style="margin-top: 15px; margin-left: 10px; text-align: center;" *ngIf="typeTitle === 'SEE IT'">
           <div *ngIf="srcData?.src">
             <ng-container *ngIf="srcData?.type =='image'">
-              <img [src]="srcData?.src" width="320" height="240"/>
+              <img [src]="srcData?.src" class="responsive_class"/>
             </ng-container>
             <ng-container *ngIf="srcData?.type == 'video'">
-              <video width="320" height="240" controls>
+              <video class="responsive_class" controls>
                 <source [src]="srcData?.src" type="video/mp4">
               </video>
             </ng-container>

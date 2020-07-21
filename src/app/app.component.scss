@@ -34,11 +34,20 @@
     opacity: 0.8;
 }
 
+.responsive_class {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    max-height: 270px;
+    background-size: contain;
+    background-color: black;
+}
+
 .center-box-container {
     width: 100%;
     background: lightgray;
     .center-box-item {
-        height: 570px;
+        height: 600px;
         border-style: solid;
         border-color: black;
         border-width: 1px;
