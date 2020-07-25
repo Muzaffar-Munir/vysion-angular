@@ -1,4 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
+
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,7 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatIconModule,
     FormsModule,
     NgImageSliderModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

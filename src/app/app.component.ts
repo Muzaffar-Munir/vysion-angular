@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AttachmentsService } from '../services/attachments.service';
 
 @Component({
   selector: 'app-root',
@@ -19,60 +20,59 @@ export class AppComponent {
   srcData = null;
 
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(
+    private sanitizer: DomSanitizer,
+    public attachmentService: AttachmentsService,
+  ) {
+    this.attachmentService.getAttachments().subscribe((data: any) => {
+      console.log(data);
+    });
 
   }
   checkType(type: any): any {
     this.typeTitle = type;
   }
 
-  uploadFile(event: any): any {
-    if (event.target.value) {
-      const objVideo = {
-        // video: event.target.value,
-        video: 'https://youtu.be/6pxRHBw-k8M'
-      };
-      const objImage = {
-        image: event.target.value,
-        thumbImage: event.target.value,
-      };
-      this.imageObject.push(objImage);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        console.log(reader.result);
-      };
-      reader.readAsDataURL(event.target.value);
-      console.log(reader.readAsDataURL(event.target.value));
-    }
-  }
+
   previewImage(fileInput: any): void {
-    console.log(fileInput)
+    const dbObj = {} as any;
     this.headerInput = fileInput.target.files[0] as File;
     console.log(this.headerInput);
+    console.log(this.headerInput.name);
     // Show preview
     const mimeType = this.headerInput.type;
     if (!this.headerInput) {
       return;
     }
     if (this.typeTitle === 'SEE IT' && mimeType.match(/image\/*/) == null && mimeType.match(/video\/*/) == null) {
-        return;
+      return;
     } else if (this.typeTitle === 'Hear IT' && mimeType.match(/audio\/*/) == null) {
-           return;
+      return;
     }
-    console.log('here');
+    if (this.headerInput.name) {
+      dbObj.fileName = this.headerInput.name;
+    }
+    if (this.headerInput.size) {
+      dbObj.fileSize = this.headerInput.size;
+    }
+    if (this.headerInput.type) {
+      dbObj.fileType = this.headerInput.type;
+    }
     const reader = new FileReader();
     reader.readAsDataURL(this.headerInput);
     reader.onload = (_event) => {
       this.previewHeader = reader.result;
-      this.image = this.previewHeader;
+
       if (mimeType.match(/image\/*/) != null) {
         console.log('in image');
+        dbObj.path = this.previewHeader;
         const objImage = {
           image: this.previewHeader,
           thumbImage: this.previewHeader,
           type: 'image',
           src: this.previewHeader
         };
+        dbObj.path = this.previewHeader;
         this.imageObject.push(objImage);
       }
       if (mimeType.match(/video\/*/) != null) {
@@ -82,6 +82,7 @@ export class AppComponent {
           type: 'video',
           src: this.previewHeader
         };
+        dbObj.path = this.previewHeader;
         this.imageObject.push(objVideo);
       }
       if (mimeType.match(/audio\/*/) != null) {
@@ -90,16 +91,23 @@ export class AppComponent {
           audio: this.sanitizer.bypassSecurityTrustUrl(this.previewHeader),
           name: this.headerInput?.name
         };
+        dbObj.path = this.previewHeader;
         this.audios.push(objAudio);
       }
-      if (this.imageObject.length === 1 && this.imageObject[0]){
+      if (this.imageObject.length === 1 && this.imageObject[0]) {
         this.srcData = this.imageObject[0];
       }
-      console.log(this.imageObject);
+      if (dbObj && dbObj.path) {
+        this.attachmentService.uploadAttachment(dbObj).subscribe((data: any) => {
+          if (data) {
+            console.log(data);
+          }
+        });
+      }
     };
   }
   imageClick(index): any {
-    this.srcData =  this.imageObject[index];
+    this.srcData = this.imageObject[index];
     console.log(this.srcData);
   }
 }
