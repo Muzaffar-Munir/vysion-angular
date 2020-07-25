@@ -15,4 +15,7 @@ export class AttachmentsService {
   uploadAttachment(data: any): any {
     return this.http.post('http://localhost:3000/attachment/attachment-upload', data);
   }
+  deleteAttachment(_id: any): any{
+    return this.http.delete('http://localhost:3000/attachment/delete-attachment', _id);
+  }
 }

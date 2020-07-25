@@ -110,4 +110,12 @@ export class AppComponent {
     this.srcData = this.imageObject[index];
     console.log(this.srcData);
   }
+  deleteAttachment(index?: any): any {
+
+    if (this.typeTitle === 'SEE IT') {
+      console.log(this.srcData);
+    } else {
+      console.log(index);
+    }
+  }
 }
