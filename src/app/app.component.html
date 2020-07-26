@@ -51,57 +51,64 @@
   <div fxFlex="60%">
     <div fxFlex="100%" class="center-box-container">
       <div class="center-box-item">
+        <div class="loading-shade" *ngIf="loadingResults">
+          <mat-spinner *ngIf="loadingResults"></mat-spinner>
+        </div>
         <p class="center-box-title">{{ typeTitle }}</p>
 
         <div style="margin-top: 15px; margin-left: 10px; text-align: center;" *ngIf="typeTitle === 'SEE IT'">
-          <div *ngIf="srcData?.src">
-            <ng-container *ngIf="srcData?.type =='image'">
-              <img [src]="srcData?.src" class="responsive_class"/>
-            </ng-container>
-            <ng-container *ngIf="srcData?.type == 'video'">
-              <video class="responsive_class" controls>
+          <div *ngIf="typeTitle === 'SEE IT' && imageObject.length">
+            <button type="button" mat-raised-button color="warn" (click)="deleteAttachment()">
+              <mat-icon class="mat-18">delete</mat-icon>
+            </button>
+              <span style="display: inline-block; margin-left: 10px;">Delete this file</span>
+                        <hr>
+                    </div>
+                    <div *ngIf="srcData?.src">
+                        <ng-container *ngIf="srcData?.type =='image'">
+                            <img [src]="srcData?.src" class="responsive_class" />
+                        </ng-container>
+                        <ng-container *ngIf="srcData?.type == 'video'">
+                            <video class="responsive_class" controls>
                 <source [src]="srcData?.src" type="video/mp4">
               </video>
-            </ng-container>
-            
-        </div>
-        </div>
-        <div style="margin-top: 20px; margin-left: 30px; text-align: center;">
-         
-          <ng-container *ngIf="imageObject && imageObject.length && typeTitle === 'SEE IT'">
-            <ng-image-slider (imageClick) ="imageClick($event)" [imagePopup]="false" [imageSize]="{width: '25%', height: 200}" [images]="imageObject" #nav></ng-image-slider>
-          </ng-container>
-          <ng-container  *ngIf="audios.length && typeTitle === 'Hear IT'">
-            <ngb-carousel
-              [showNavigationArrows]="true"
-              [showNavigationIndicators]="false"
-            >
-              <ng-template ngbSlide *ngFor="let aud of audios">
-                  <div style="height: 162px;
+                        </ng-container>
+
+                    </div>
+                </div>
+                <div style="margin-top: 20px; margin-left: 30px; text-align: center;">
+
+                    <ng-container *ngIf="imageObject && imageObject.length && typeTitle === 'SEE IT'">
+                        <ng-image-slider (imageClick)="imageClick($event)" [imagePopup]="false" [imageSize]="{width: '25%', height: 200}" [images]="imageObject" #nav></ng-image-slider>
+                    </ng-container>
+                    <ng-container *ngIf="audios.length && typeTitle === 'Hear IT'">
+                        <ngb-carousel [showNavigationArrows]="true" [showNavigationIndicators]="false">
+                            <ng-template ngbSlide *ngFor="let aud of audios">
+                                <button type="button" mat-raised-button color="warn" (click)="deleteAttachment(aud)">
+                  <mat-icon class="mat-18">delete</mat-icon>
+                </button>
+                                <span style="display: inline-block; margin-left: 10px;">Delete this file</span>
+                                <hr>
+
+                                <div style="height: 162px;
                   padding-top: 48px;">
-                <audio controls>
+                                    <audio controls>
                     <source [src]="aud.audio" type="audio/mpeg">
                   </audio>
-                </div>
-                <div class="carousel-caption" style="bottom: -10px !important; padding-top: 10px;">
-                    <p>{{aud?.name}}</p>
-                  </div>
-              </ng-template>
-            </ngb-carousel>
-          </ng-container>
+                                </div>
+                                <div class="carousel-caption" style="bottom: -10px !important; padding-top: 10px;">
+                                    <p>{{aud?.name}}</p>
+                                </div>
+                            </ng-template>
+                        </ngb-carousel>
+                    </ng-container>
 
-          <input
-            hidden
-            type="file"
-            #headerInput
-            (change)="previewImage($event)"
-          />
-          <button type="button" mat-raised-button (click)="headerInput.click()">
+                    <input hidden type="file" #headerInput (change)="previewImage($event)" />
+                    <button type="button" mat-raised-button color="primary" (click)="headerInput.click()">
             <mat-icon class="mat-18">add_circle</mat-icon>
           </button>
-          <ng-container *ngIf="typeTitle === 'Hear IT'">
-            <span style="display: inline-block; margin-left: 10px;"
-            >Insert New Audio</span
+                    <ng-container *ngIf="typeTitle === 'Hear IT'">
+                        <span style="display: inline-block; margin-left: 10px;">Insert New Audio</span
           >
           </ng-container>
           <ng-container *ngIf="typeTitle === 'SEE IT'">
@@ -109,7 +116,7 @@
             >Insert New Image or Video</span
           >
           </ng-container>
-         
+
         </div>
       </div>
     </div>

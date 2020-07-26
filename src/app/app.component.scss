@@ -43,11 +43,24 @@
     background-color: black;
 }
 
+.loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .center-box-container {
     width: 100%;
     background: lightgray;
     .center-box-item {
-        height: 600px;
+        height: 660px;
         border-style: solid;
         border-color: black;
         border-width: 1px;
