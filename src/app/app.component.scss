@@ -43,6 +43,15 @@
     background-color: black;
 }
 
+.video_responsive_class {
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    max-height: 370px;
+    background-size: contain;
+    background-color: black;
+}
+
 .loading-shade {
     position: absolute;
     top: 0;
