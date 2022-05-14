@@ -22,4 +22,7 @@ export class AttachmentsService {
   deleteAttachment(id: any): any {
     return this.http.delete(`${this.apiUrl}attachment/delete-attachment/${id}`);
   }
+  deleteAttachment(_id: any): any{
+    return this.http.delete('http://localhost:3000/attachment/delete-attachment', _id);
+  }
 }

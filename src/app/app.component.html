@@ -56,13 +56,13 @@
         </div>
         <p class="center-box-title">{{ typeTitle }}</p>
 
-        <div style="margin-top: 15px; margin-left: 10px; text-align: center;height: 380px;" *ngIf="typeTitle === 'SEE IT'">
+        <div style="margin-top: 15px; margin-left: 10px; text-align: center;" *ngIf="typeTitle === 'SEE IT'">
           <div *ngIf="typeTitle === 'SEE IT' && imageObject.length">
-            <!-- <button type="button" mat-raised-button color="warn" (click)="deleteAttachment()">
+            <button type="button" mat-raised-button color="warn" (click)="deleteAttachment()">
               <mat-icon class="mat-18">delete</mat-icon>
-            </button> -->
-              <!-- <span style="display: inline-block; margin-left: 10px;">Delete this file</span>
-                        <hr> -->
+            </button>
+              <span style="display: inline-block; margin-left: 10px;">Delete this file</span>
+                        <hr>
                     </div>
                     <div *ngIf="srcData?.src">
                         <ng-container *ngIf="srcData?.type =='image'">
